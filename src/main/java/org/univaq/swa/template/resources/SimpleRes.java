@@ -31,6 +31,7 @@ public class SimpleRes {
         List<String> l = new ArrayList();
         l.add("ciao1");
         l.add("ciao2");
+        // commento prima prova commit
 
         return Response.ok(l).build();
     }
