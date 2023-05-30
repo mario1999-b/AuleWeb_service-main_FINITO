@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Aule Web
+  description: OpenAPI
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/AuleWeb_services_war/'
+paths:
+
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: internalToken
+  responses:
+    GeneralError:
+      description: errore generale
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: "Messaggio di errore"
+    UnauthorizedError:
+      description: bearer token mancante o non valido
+    NotFoundError:
+      description: elemento non trovato
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: "Elemento inesistente"
+    BadRequest:
+      description: richiesta non valida
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: "Richiestaa non valida"
+    Forbidden:
+      description: operazione non permessa
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: "Operazione non permessa"
+  schemas:
+    Aula:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        nome:
+          type: string
+          example: "C 1.10"
+        posizione:
+          type: object
+          properties:
+            luogo:
+              $ref: '#/components/schemas/Luogo'
+            edificio:
+              $ref: '#/components/schemas/Edificio'
+            piano:
+              $ref: '#/components/schemas/Piano'
+        emailResponsabile:
+          type: string
+          example: "responsabileAula@gmail.com"
+        listaAttrezzature:
+          $ref: '#/components/schemas/ListaAttrezzature'
+        numeroPreseElettriche:
+          type: integer
+          format: int32
+          readOnly: true
+          example: "4"
+    Gruppo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        nome:
+          $ref: '#/components/schemas/Dipartimento'
+        Descrizione:
+          type: string
+          description: Questa è la descrizione generica di un dipartimento
+    Evento:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          readOnly: true
+        nomeCorso:
+          type: string
+          example: "Sviluppo Web Avanzato"
+        nomeResposabile:
+          type: string
+          example: "Professore X"
+        descrizioneEvento:
+          type: string
+          description: Questa è la descrizione generale di un evento
+        emailResponsabile:
+          type: string
+          example: "responsabileEvento@gmail.com"
+        tipologia:
+          $ref: '#/components/schemas/Tipologia'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Luogo:
+      type: string
+      enum:
+        - COPPITO
+        - ROIO
+        - L'AQUILA
+
+    Edificio:
+      type: string
+      enum:
+        - BLOCCO 0
+        - BLOCCO 1
+        - BLOCCO 2
+        - BLOCCO 3
+        - BIBLIOTECA
+        - BLOCCO 11
+    Piano:
+      type: string
+      enum:
+        - PIANO TERRA
+        - PRIMO PIANO
+        - SECONDO PIANO
+        - TERZO PIANO
+        - QUARTO PIANO
+
+    ListaAttrezzature:
+      type: string
+      enum:
+        - PROIETTORE
+        - SCHERMO MOTORIZZATO
+        - SCHERMO MANUALE
+        - IMPIANTO AUDIO
+        - PC FISSO
+        - MICROFONO A FILO
+        - MICROFONO
+        - LAVAGNA LUMINOSA
+        - WI-FI
+    Dipartimento:
+      type: string
+      enum:
+        - INGEGNERIA
+        - SCIENZE UMANE
+        - MATEMATICA
+        - FISICA
+        - PSICOLOGIA
+        - INFORMATICA
+        - SCIENZE MOTORIE
+    Tipologia:
+      type: string
+      enum:
+        - LEZIONE
+        - ESAME
+        - SEMINARIO
+        - PARZIALE
+        - RIUNIONE
+        - LAUREA
+
+
+
+
+
+
+
