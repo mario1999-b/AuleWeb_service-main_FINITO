@@ -40,20 +40,120 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '500':
           $ref: '#/components/responses/GeneralError'
-  'rest/auth/doLogout':
+
+  '/rest/auth/logout':
     delete:
       operationId: doLogout
       tags:
         - autenticazione
       security:
         - bearerAuth: [ ]
-      response:
+      responses:
         '200':
           description: successful logout
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-        '501':
+        '500':
           $ref: '#/components/responses/GeneralError'
+
+#3
+  '/rest/aule/':
+    post:
+      operationId: aggiungiAula
+      tags:
+        - aule
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Aula'
+      responses:
+        '201':
+          description: Aula aggiunta
+          headers:
+            location:
+              description: url del aula aggiunta
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uri
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+
+#4
+  '/rest/aule/{id_aula}/gruppi/{id_gruppo}':
+    put:
+      operationId: assegnazioneAulaGruppo
+      tags:
+        - aule
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: id_aula
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id_gruppo
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Aula'
+      responses:
+        '204':
+          description: Aula assegnata al gruppo specificato
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+
+#5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -125,6 +225,9 @@ components:
           format: int32
           readOnly: true
           example: "4"
+        gruppo:
+          $ref: "#/components/schemas/Gruppo"
+
     Gruppo:
       type: object
       properties:
