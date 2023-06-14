@@ -1,62 +1,473 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <!-- META DATA -->
-        <title>AuleWeb Service</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="AuleWeb Service">
+<html lang="en">
+<head>
+    <!-- METADATA -->
+    <title>AuleWeb_services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="AuleWeb_service">
 
-        <!---ATTENZIONE DA QUI -->
-        <!-- CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-        <!-- lineicons -->
-        <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
-        <!-- JQuery va messo prima sennò non si può usare -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- CSS -->
+    <!-- IMPORTATI -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- lineicons -->
+    <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+    <!-- JQuery va messo prima sennò non si può usare -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <!-- IMPORTATI -->
 
-        <link rel="stylesheet" href="res/css/style.css"/>
-        <link rel="stylesheet" href="res/css/navbar.css"/>
-        <link rel="stylesheet" href="res/css/tabBar.css"/>
-        <link rel="stylesheet" href="res/css/table.css"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/headers/">
+    <!-- Bootstrap core CSS -->
+    <link href="res/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="res/css/bootstrap.rtl.min.css" rel="stylesheet" >
+    <link href="res/css/style.css" rel="stylesheet"/>
 
-        <!-- A QUI!! -->
+    <link href="res/css/navbar.css" rel="stylesheet"/>
 
-    </head>
-    <body>
-    <div class="topnav">
-        <a class="active" href="#">AuleWeb</a>
+    <link href="res/css/style.css" rel="stylesheet"/>
+    <link href="res/css/table.css" rel="stylesheet"/>
+    <link href="res/css/carosello.css" rel="stylesheet"/>
+    <link href="res/css/filtro.css" rel="stylesheet"/>
+    <link href="res/css/tabBar.css" rel="stylesheet"/>
 
-        <div class="login-container">
-            <form action="/action_page.php">
-                <input type="text" placeholder="Username" name="username">
-                <input type="text" placeholder="Password" name="psw">
-                <button type="submit">Login</button>
-            </form>
+    <link href="res/css/stats.css" rel="stylesheet"/>
+    <link href="res/css/search.css" rel="stylesheet"/>
+    <!-- CSS -->
+
+</head>
+
+<body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="bootstrap" viewBox="0 0 118 94">
+            <title>Bootstrap</title>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+        </symbol>
+        <symbol id="home" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"></path>
+        </symbol>
+        <symbol id="speedometer2" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"></path>
+            <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"></path>
+        </symbol>
+        <symbol id="table" viewBox="0 0 16 16">
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"></path>
+        </symbol>
+        <symbol id="people-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
+        </symbol>
+        <symbol id="grid" viewBox="0 0 16 16">
+            <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"></path>
+        </symbol>
+    </svg>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 100; position: sticky; top: 0">
+        <a class="navbar-brand" href="">AuleWeb</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="navbar-nav mr-auto"></div>
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start" style="margin-right: 20rem">
+             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                 <button class="btn btn-outline-light me-2" id="tab-collezioni-btn">Aule</button>
+                 <button class="btn btn-outline-light me-2" id="tab-eventi-btn">Eventi</button>
+                 <button class="btn btn-outline-light me-2" id="tab-gruppi-btn">Gruppi</button>
+                 <button class="btn btn-outline-light me-2" id="tab-dipartimenti-btn">Dipartimenti</button>
+            </ul>
+            </div>
+            <div class="login-form" id="login">
+                <div class="dropdown">
+                    <div class="nav-square-accedi">
+                        <a class="bt-navbar-accedi" id="login-btn">Accedi</a>
+                    </div>
+                    <div class="dropdown-menu" id="login-form" style="margin-right: 3rem">
+                        <div class="form-group" style="width: 100%; padding: 0">
+                            <label for="username">Username</label>
+                            <input class="" type="text" placeholder="Username" id="username" name="username"
+                                   style="width: 100%">
+                            <label for="password" style="margin-top: 1rem">Password</label>
+                            <input class="" type="password" placeholder="Password" id="password" name="password"
+                                   style="width: 100%">
+                            <div style="text-align: center">
+                                <button class="btn btn-success" id="login-send" style="margin-top: 1rem">Login</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="login-form" id="logout" style="display: none">
+                <div class="nav-square-accedi">
+                    <a class="bt-navbar-accedi" id="logout-send">Logout</a>
+                </div>
+            </div>
+            <div class="nav-square hidden aligned">
+                <a class="bt-navbar-registrati hidden">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="b-example-divider" ></div>
+
+    <div class="tab" id="tab-collezioni">
+        <div class="tabelle-filtro-container">
+            <div class="side-bar-container">
+                <!--OPERAZIONI SULLE COLLEZIONI-->
+                <div class="title">OPERAZIONI SULLE COLLEZIONI</div>
+                <div class="filtro">
+                    <div class="filtro-list">
+                        <dl class="filtro-info list-group list-group-flush">
+                            <dd>
+                                <button class="btn btn-success btn-w-fixed" onclick="getCollezioniUtente()">
+                                    getCollezioniUtente
+                                </button>
+                            </dd>
+                            <dd>
+                                <button class="btn btn-success btn-w-fixed" onclick="getCollezioniCondivise()">
+                                    getCollezioniCondivise
+                                </button>
+                            </dd>
+                            <dd>
+                                <button class="btn btn-primary btn-w-fixed"
+                                        onclick="toggleVisibility($('#getCollezione_form'))">getCollezione
+                                </button>
+                                <div class="hidden" id="getCollezione_form">
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                    <div class="flex justify-between">
+                                        <label for="getCollezione">ID collezione</label>
+                                        <input class="input-small" type="number" min="1" name="getCollezione"
+                                               id="getCollezione"
+                                               placeholder="id collezione">
+                                    </div>
+                                    <div class="flex justify-center mt-3" style="width: 100%;">
+                                        <button onclick="getCollezione($('#getCollezione').val())" class="btn btn-warning">
+                                            Trova
+                                        </button>
+                                    </div>
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                </div>
+                            </dd>
+                            <dd>
+                                <button class="btn btn-primary btn-w-fixed"
+                                        onclick="toggleVisibility($('#addDiscoCollezione_form_1'))">addDiscoCollezione
+                                </button>
+                                <div class="hidden" id="addDiscoCollezione_form_1">
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                    <div class="flex justify-between">
+                                        <label for="addDiscoCollezione_c">ID collezione</label>
+                                        <input class="input-small" type="number" min="1" name="addDiscoCollezione_c"
+                                               id="addDiscoCollezione_c" placeholder="id collezione">
+                                    </div>
+
+                                    <div class="flex justify-center mt-3" style="width: 100%;">
+                                        <button onclick="discoForm('add')" class="btn btn-warning">
+                                            Aggiungi disco
+                                        </button>
+                                    </div>
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                </div>
+                            </dd>
+                            <dd>
+                                <button class="btn btn-primary btn-w-fixed"
+                                        onclick="toggleVisibility($('#updateDiscoCollezione_form_1'))">updateDiscoCollezione
+                                </button>
+                                <div class="hidden" id="updateDiscoCollezione_form_1">
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                    <div class="flex justify-between">
+                                        <label for="updateDiscoCollezione_c">ID collezione</label>
+                                        <input class="input-small" type="number" min="1" name="updateDiscoCollezione_c"
+                                               id="updateDiscoCollezione_c" placeholder="id collezione">
+                                    </div>
+                                    <div class="flex justify-between mt-1">
+                                        <label for="updateDiscoCollezione_d">ID disco</label>
+                                        <input class="input-small" type="number" min="1" name="updateDiscoCollezione_d"
+                                               id="updateDiscoCollezione_d" placeholder="id disco">
+                                    </div>
+
+                                    <div class="flex justify-center mt-3" style="width: 100%;">
+                                        <button onclick="discoForm('update')" class="btn btn-warning">
+                                            Aggiorna disco
+                                        </button>
+                                    </div>
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                </div>
+                            </dd>
+
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <!--END OPERAZIONI SULLE COLLEZIONI-->
+
+            <div class="tables-container">
+                <!--TABELLA COLLEZIONI-->
+                <div class="table-container" id="collezioni-container" style="display: block">
+                    <div class="title flex justify-between align-items-center">
+                        COLLEZIONI
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-borderless table-striped" aria-label="Tabella Collezioni">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Titolo</th>
+                                <th scope="col">Data creazione</th>
+                                <th scope="col">Privacy</th>
+                            </tr>
+                            </thead>
+                            <tbody id="collezione-result">
+
+                            </tbody>
+                        </table>
+                        <div class="table-empty" id="collezione-empty">Non ci sono collezioni.</div>
+                    </div>
+                </div>
+                <!--END TABELLA COLLEZIONI-->
+
+                <!--FORM UPDATE DISCO COLLEZIONE-->
+                <div class="table-container" id="updateDiscoCollezione_form_2" style="display: none">
+                    <div class="card form-card" style="width: 100%">
+                        <div class="card-header">
+                            <span class="form-title flex justify-center align-items-center">AGGIORNA DISCO</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-container flex justify-between flex-wrap">
+                                <div class="form-group" style="width: 40%;">
+                                    <label for="titolo_update">Titolo:</label>
+                                    <input type="text" class="form-control" id="titolo_update" name="titolo"
+                                           placeholder="Titolo" required>
+                                </div>
+
+                                <div class="form-group" style="width: 20%;">
+                                    <label for="anno_update">Anno:</label>
+                                    <input type="number" class="form-control" id="anno_update" name="anno"
+                                           placeholder="anno" required>
+                                </div>
+
+                                <div class="form-group" style="width: 20%;">
+                                    <label for="barcode_update">Barcode:</label>
+                                    <input type="text" class="form-control" id="barcode_update" name="barcode"
+                                           placeholder="Barcode">
+                                </div>
+
+                                <div class="form-group" style="width: 20%;">
+                                    <label for="etichetta_update">Etichetta:</label>
+                                    <input type="text" class="form-control" id="etichetta_update" name="etichetta"
+                                           placeholder="Etichetta" required>
+                                </div>
+                            </div>
+                            <div class="form-container flex justify-between flex-wrap">
+                                <div class="form-group" style="width: 33%;">
+                                    <label for="genere_update">Genere:</label>
+                                    <select class="selectpicker" id="genere_update" name="genere" data-live-search="true"
+                                            required>
+                                        <option selected value="">Scegli un genere</option>
+                                        <option value="POP">POP</option>
+                                        <option value="ROCK">ROCK</option>
+                                        <option value="JAZZ">JAZZ</option>
+                                        <option value="CLASSIC">CLASSIC</option>
+                                        <option value="METAL">METAL</option>
+                                        <option value="RAP">RAP</option>
+                                        <option value="BLUES">BLUES</option>
+                                        <option value="PUNK">PUNK</option>
+                                        <option value="REGGAE">REGGAE</option>
+                                        <option value="COUNTRY">COUNTRY</option>
+                                        <option value="HIPHOP">HIPHOP</option>
+                                        <option value="ELECTRONIC">ELECTRONIC</option>
+                                        <option value="OTHER">OTHER</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="width: 33%;">
+                                    <label for="formato_update">Formato:</label>
+                                    <select class="selectpicker" id="formato_update" name="formato" data-live-search="true"
+                                            required>
+                                        <option selected value="">Scegli un formato</option>
+                                        <option value="CD">CD</option>
+                                        <option value="VINILE">VINILE</option>
+                                        <option value="DIGITALE">DIGITALE</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="width: 33%;">
+                                    <label for="statoConservazione_update">Stato di conservazione:</label>
+                                    <select class="selectpicker" id="statoConservazione_update" name="statoConservazione"
+                                            data-live-search="true" required>
+                                        <option selected value="">Scegli uno stato di conservazione</option>
+                                        <option value="NUOVO">NUOVO</option>
+                                        <option value="BUONO">BUONO</option>
+                                        <option value="USATO">USATO</option>
+                                        <option value="SCARSO">SCARSO</option>
+                                        <option value="ROTTO">ROTTO</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-container flex justify-center flex-wrap">
+                                <div class="form-group">
+                                    <label for="autore_update">Autori:</label>
+                                    <select class="selectpicker" id="autore_update" name="autore" multiple
+                                            data-live-search="true" required>
+                                        <option value="">Scegli un autore</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex justify-center align-items-center pt-3">
+                                <button class="btn btn-success"
+                                        onclick="updateDiscoCollezione($('#updateDiscoCollezione_c').val(), $('#updateDiscoCollezione_d').val())">
+                                    SALVA
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--END FORM UPDATE DISCO COLLEZIONE-->
+
+                <!--FORM ADD DISCO COLLEZIONE-->
+                <div class="table-container" id="addDiscoCollezione_form_2" style="display: none">
+                    <div class="card form-card" style="width: 100%">
+                        <div class="card-header">
+                            <span class="form-title flex justify-center align-items-center">AGGIUNGI DISCO</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-container flex justify-between flex-wrap">
+                                <div class="form-group" style="width: 40%;">
+                                    <label for="titolo_add">Titolo:</label>
+                                    <input type="text" class="form-control" id="titolo_add" name="titolo"
+                                           placeholder="Titolo" required>
+                                </div>
+
+                                <div class="form-group" style="width: 20%;">
+                                    <label for="anno_add">Anno:</label>
+                                    <input type="number" class="form-control" id="anno_add" name="anno" placeholder="anno"
+                                           required>
+                                </div>
+
+                                <div class="form-group" style="width: 20%;">
+                                    <label for="barcode_add">Barcode:</label>
+                                    <input type="text" class="form-control" value="" id="barcode_add" name="barcode"
+                                           placeholder="Barcode">
+                                </div>
+
+                                <div class="form-group" style="width: 20%;">
+                                    <label for="etichetta_add">Etichetta:</label>
+                                    <input type="text" class="form-control" required id="etichetta_add" name="etichetta"
+                                           placeholder="Etichetta">
+                                </div>
+                            </div>
+                            <div class="form-container flex justify-between flex-wrap">
+                                <div class="form-group" style="width: 33%;">
+                                    <label for="genere_add">Genere:</label>
+                                    <select class="selectpicker" data-live-search="true" id="genere_add" name="genere"
+                                            required>
+                                        <option selected value="">Scegli un genere</option>
+                                        <option value="POP">POP</option>
+                                        <option value="ROCK">ROCK</option>
+                                        <option value="JAZZ">JAZZ</option>
+                                        <option value="CLASSIC">CLASSIC</option>
+                                        <option value="METAL">METAL</option>
+                                        <option value="RAP">RAP</option>
+                                        <option value="BLUES">BLUES</option>
+                                        <option value="PUNK">PUNK</option>
+                                        <option value="REGGAE">REGGAE</option>
+                                        <option value="COUNTRY">COUNTRY</option>
+                                        <option value="HIPHOP">HIPHOP</option>
+                                        <option value="ELECTRONIC">ELECTRONIC</option>
+                                        <option value="OTHER">OTHER</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="width: 33%;">
+                                    <label for="formato_add">Formato:</label>
+                                    <select id="formato_add" name="formato" class="selectpicker" data-live-search="true"
+                                            required>
+                                        <option selected value="">Scegli un formato</option>
+                                        <option value="CD">CD</option>
+                                        <option value="VINILE">VINILE</option>
+                                        <option value="DIGITALE">DIGITALE</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="width: 33%;">
+                                    <label for="statoConservazione_add">Stato di conservazione:</label>
+                                    <select id="statoConservazione_add" name="statoConservazione" class="selectpicker"
+                                            data-live-search="true" required>
+                                        <option selected value="">Scegli uno stato di conservazione</option>
+                                        <option value="NUOVO">NUOVO</option>
+                                        <option value="BUONO">BUONO</option>
+                                        <option value="USATO">USATO</option>
+                                        <option value="SCARSO">SCARSO</option>
+                                        <option value="ROTTO">ROTTO</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-container flex justify-center flex-wrap">
+                                <div class="form-group">
+                                    <label for="autore_add">Autori:</label>
+                                    <select id="autore_add" name="autore" class="selectpicker" multiple
+                                            data-live-search="true" required>
+                                        <option value="">Scegli un autore</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex justify-center align-items-center pt-3">
+                                <button class="btn btn-success"
+                                        onclick="addDiscoCollezione($('#addDiscoCollezione_c').val())">
+                                    SALVA
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--END FORM ADD DISCO COLLEZIONE-->
+            </div>
         </div>
     </div>
 
-    <div class="tab-bar">
-        <!--<button class="btn btn-warning tab-btn" id="tab-collezioni-btn" >Aule</button> -->
-        <button class="btn btn-dark tab-btn" id="tab-aule-btn">Aule</button>
-        <button class="btn btn-dark tab-btn" id="tab-autori-btn">Eventi</button>
-        <button class="btn btn-dark tab-btn" id="tab-dischi-btn">Gruppi</button>
 
-    </div>
-    <div class="tab-line"></div>
 
-    <div class="title flex align-items-center mb-3">
-        INFO:&nbsp<strong id="message"></strong>
-    </div>
 
-    </body>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- SCRIPT HEADER -->
+    <script src="res/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SCRIPTS PER TUTTE LE PAGINE -->
+    <script src="res/js/utility.js"></script>
+    <!-- SCRIPTS PER L'AUTENTICAZIONE -->
+    <script src="res/js/auth.js"></script>
+    <!-- SCRIPTS PER LE TAB -->
+    <script src="res/js/tab.js"></script>
+    <!-- SCRIPTS PER LE COLLEZIONI -->
+    <script src="res/js/collezioni.js"></script>
+    <!-- SCRIPTS PER GLI AUTORI -->
+    <script src="res/js/autori.js"></script>
+    <!-- SCRIPTS PER I DISCHI -->
+    <script src="res/js/dischi.js"></script>
+    <!-- SCRIPTS PER LE STATISTICHE -->
+    <script src="res/js/stats.js"></script>
+    <!-- END SCRIPT -->
+
+</body>
+
 </html>
