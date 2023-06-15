@@ -1,17 +1,15 @@
 /*
-* File per le operazioni sulle collezioni
-* @Author: Davide De Acetis
-* @Author: Raluca Mihaela Bujoreanu
+
 */
 
 //DICHIARAZIONE SELETTORI
 const collezione_result = $('#collezione-result');
 const collezione_empty = $('#collezione-empty');
 const collezioni_container = $('#collezioni-container');
-const id_collezione_update = $('#updateDiscoCollezione_c');
-const id_disco_update = $('#updateDiscoCollezione_d');
+const id_aula_update = $('#assegnazioneAulaGruppo_c');
+const id_gruppo_update = $('#assegnazioneAulaGruppo_d');
 const id_collezione_add = $('#addDiscoCollezione_c');
-const update_disco_collezione_form = $('#updateDiscoCollezione_form_2')
+const update_gruppo_aula_form = $('#assegnazioneAulaGruppo_form_2')
 const add_disco_collezione_form = $('#addDiscoCollezione_form_2')
 //END DICHIARAZIONE SELETTOR
 
@@ -139,28 +137,28 @@ function addDiscoCollezione(c) {
 }
 
 /*
-* 10. Aggiorna un disco all'interno di una collezione
-* @param {int} c - id della collezione
-* @param {int} d - id del disco nella collezione
+*
+* @param {int} c - id dell' aula
+* @param {int} d - id del gruppo
 */
-function updateDiscoCollezione(c, d) {
+function assegnazioneAulaGruppo(c, d) {
     message("", "");
     if (c && d) {
         $.ajax({
-            url: "rest/collezioni/" + c + "/dischi/" + d,
+            url: "rest/aule/" + c + "/gruppi/" + d,
             method: "PUT",
             contentType: "application/json",
-            //vengono passati i dati della form update_disco_collezione_form
+            //vengono passati i dati della form assegnazioneAulaGruppo_form
             data: JSON.stringify({
                 id: d,
-                titolo: $('#titolo_update').val(),
-                anno: $('#anno_update').val(),
-                genere: $('#genere_update').val(),
-                formato: $('#formato_update').val(),
-                stato_conservazione: $('#statoConservazione_update').val(),
-                barcode: $('#barcode_update').val(),
-                etichetta: $('#etichetta_update').val(),
-                autori: $('#autore_update').val()
+                nome: $('#nome_update').val(),
+                luogo: $('#luogo_update').val(),
+                edificio: $('#edificio_update').val(),
+                piano: $('#piano_update').val(),
+                emailResponsabile: $('#emailResponsabile_update').val(),
+                listaAttrezzature: $('#listaAttrezzature_update').val(),
+                numeroPreseElettriche: $('#numeroPreseElettriche_update').val(),
+                gruppo: $('#gruppo_update').val(),
             }),
             success: function () {
                 collezione_result.children().remove();
@@ -184,31 +182,31 @@ function updateDiscoCollezione(c, d) {
 * Utility che permette di visualizzare le form per le operazioni di add e update di un disco in una collezione
 * @param {String} op - operazione da eseguire (add o update)
 */
-function discoForm(op) {
+function gruppoForm(op) {
     message("", "");
     clear();
-    if (op === 'add') { //ADD DI UN DISCO IN UNA COLLEZIONE
+    if (op === 'add') { //ADD DI UN gruupo in un aula
         //Se i campi non sono compilati non viene mostrata la form e si esce dalla funzione.
-        if (id_collezione_add.val() === '') {
+        if (id_aula_add.val() === '') {
             message('Inserire tutti i campi obbligatori.', 'error')
             return;
-        } else if (checkCollezione(id_collezione_add.val()) === false) {
+        } else if (checkCollezione(id_aula_add.val()) === false) {
             return;
         }
         //Mostra la form per creare e aggiungere un disco alla collezione specificata
-        toggleVisibility(add_disco_collezione_form);
+        toggleVisibility(add_gruppo_aula_form);
         //Ottiene tutti gli autori del sistema e li inserisce nella select degli autori
         getAutoriForm($('#autore_add'));
 
     } else if (op === 'update') { //UPDATE DEL DISCO IN UNA COLLEZIONE
-        if (id_collezione_update.val() === '' || id_disco_update.val() === '') {
+        if (id_aula_update.val() === '' || id_gruppo_update.val() === '') {
             message('Inserire tutti i campi obbligatori.', 'error')
             return;
-        } else if (checkDiscoCollezione(id_collezione_update.val(), id_disco_update.val()) === false) {
+        } else if (checkDiscoCollezione(id_aula_update.val(), id_gruppo_update.val()) === false) {
             return;
         }
         //Mostra la form per aggiornare un disco della collezione specificata
-        toggleVisibility(update_disco_collezione_form);
+        toggleVisibility(update_gruppo_aula_form);
         //Popola i campi della form con i dati del disco selezionati
         populateDiscoCollezioneUpdateForm();
     }

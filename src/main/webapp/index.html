@@ -124,11 +124,11 @@
 
     <div class="b-example-divider" ></div>
 
-    <div class="tab" id="tab-collezioni">
+    <div class="tab" id="tab-aule">
         <div class="tabelle-filtro-container">
             <div class="side-bar-container">
-                <!--OPERAZIONI SULLE COLLEZIONI-->
-                <div class="title">OPERAZIONI SULLE COLLEZIONI</div>
+                <!--OPERAZIONI SULLE AULE-->
+                <div class="title">OPERAZIONI SULLE AULE</div>
                 <div class="filtro">
                     <div class="filtro-list">
                         <dl class="filtro-info list-group list-group-flush">
@@ -184,24 +184,24 @@
                             </dd>
                             <dd>
                                 <button class="btn btn-primary btn-w-fixed"
-                                        onclick="toggleVisibility($('#updateDiscoCollezione_form_1'))">updateDiscoCollezione
+                                        onclick="toggleVisibility($('#assegnazioneAulaGruppo_form_1'))">Assegnazione aula ad un gruppo
                                 </button>
-                                <div class="hidden" id="updateDiscoCollezione_form_1">
+                                <div class="hidden" id="assegnazioneAulaGruppo_form_1">
                                     <div class="horizontal-separator filtro-horizontal-separator"></div>
                                     <div class="flex justify-between">
-                                        <label for="updateDiscoCollezione_c">ID collezione</label>
-                                        <input class="input-small" type="number" min="1" name="updateDiscoCollezione_c"
-                                               id="updateDiscoCollezione_c" placeholder="id collezione">
+                                        <label for="assegnazioneAulaGruppo_c">ID Aula</label>
+                                        <input class="input-small" type="number" min="1" name="assegnazioneAulaGruppo_c"
+                                               id="assegnazioneAulaGruppo_c" placeholder="id aula">
                                     </div>
                                     <div class="flex justify-between mt-1">
-                                        <label for="updateDiscoCollezione_d">ID disco</label>
-                                        <input class="input-small" type="number" min="1" name="updateDiscoCollezione_d"
-                                               id="updateDiscoCollezione_d" placeholder="id disco">
+                                        <label for="assegnazioneAulaGruppo_d">ID Gruppo</label>
+                                        <input class="input-small" type="number" min="1" name="assegnazioneAulaGruppo_d"
+                                               id="assegnazioneAulaGruppo_d" placeholder="id gruppo">
                                     </div>
 
                                     <div class="flex justify-center mt-3" style="width: 100%;">
-                                        <button onclick="discoForm('update')" class="btn btn-warning">
-                                            Aggiorna disco
+                                        <button onclick="gruppoForm('update')" class="btn btn-warning">
+                                            Aggiorna gruppo
                                         </button>
                                     </div>
                                     <div class="horizontal-separator filtro-horizontal-separator"></div>
@@ -240,7 +240,7 @@
                 <!--END TABELLA COLLEZIONI-->
 
                 <!--FORM UPDATE DISCO COLLEZIONE-->
-                <div class="table-container" id="updateDiscoCollezione_form_2" style="display: none">
+                <div class="table-container" id="assegnazioneAulaGruppo_form_2" style="display: none">
                     <div class="card form-card" style="width: 100%">
                         <div class="card-header">
                             <span class="form-title flex justify-center align-items-center">AGGIORNA DISCO</span>
@@ -327,7 +327,7 @@
                             </div>
                             <div class="flex justify-center align-items-center pt-3">
                                 <button class="btn btn-success"
-                                        onclick="updateDiscoCollezione($('#updateDiscoCollezione_c').val(), $('#updateDiscoCollezione_d').val())">
+                                        onclick="assegnazioneAulaGruppo($('#assegnazioneAulaGruppo_c').val(), $('#assegnazioneAulaGruppo_d').val())">
                                     SALVA
                                 </button>
                             </div>

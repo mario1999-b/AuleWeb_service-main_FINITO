@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    const tab_collezioni = $('#tab-collezioni');
+    const tab_aule = $('#tab-aule');
     const tab_autori = $('#tab-autori');
     const tab_dischi = $('#tab-dischi');
     const tab_statistiche = $('#tab-statistiche');
 
-    const tab_collezioni_btn = $('#tab-collezioni-btn');
+    const tab_aule_btn = $('#tab-aule-btn');
     const tab_autori_btn = $('#tab-autori-btn');
     const tab_dischi_btn = $('#tab-dischi-btn');
     const tab_statistiche_btn = $('#tab-statistiche-btn');
@@ -16,26 +16,26 @@ $(document).ready(function () {
     function hideAll() {
         clear();
         message("", "")
-        tab_collezioni.hide();
+        tab_aule.hide();
         tab_autori.hide();
         tab_dischi.hide();
         tab_statistiche.hide();
 
-        tab_collezioni_btn.addClass('btn-dark');
+        tab_aule_btn.addClass('btn-dark');
         tab_autori_btn.addClass('btn-dark');
         tab_dischi_btn.addClass('btn-dark');
         tab_statistiche_btn.addClass('btn-dark');
     }
 
-    tab_collezioni_btn.click(function () {
+    tab_aule_btn.click(function () {
         hideAll();
-        tab_collezioni.show();
-        if (tab_collezioni_btn.hasClass('btn-dark')) {
-            tab_collezioni_btn.removeClass('btn-dark');
-            tab_collezioni_btn.addClass('btn-warning');
+        tab_aule.show();
+        if (tab_aule_btn.hasClass('btn-dark')) {
+            tab_aule_btn.removeClass('btn-dark');
+            tab_aule_btn.addClass('btn-warning');
         } else {
-            tab_collezioni_btn.removeClass('btn-warning');
-            tab_collezioni_btn.addClass('btn-dark');
+            tab_aule_btn.removeClass('btn-warning');
+            tab_aule_btn.addClass('btn-dark');
         }
     });
 
