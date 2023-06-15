@@ -3,9 +3,11 @@ package org.univaq.swa.template.exceptions;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 
+import java.sql.SQLException;
+
 public class RESTWebApplicationException extends WebApplicationException {
 
-    public RESTWebApplicationException() {
+    public RESTWebApplicationException(SQLException ex) {
         super(Response.serverError().build());
     }
 

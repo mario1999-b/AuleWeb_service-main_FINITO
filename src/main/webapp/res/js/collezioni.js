@@ -3,9 +3,9 @@
 */
 
 //DICHIARAZIONE SELETTORI
-const collezione_result = $('#collezione-result');
-const collezione_empty = $('#collezione-empty');
-const collezioni_container = $('#collezioni-container');
+const aula_result = $('#aula-result');
+const aula_empty = $('#aula-empty');
+const aule_container = $('#aule-container');
 const id_aula_update = $('#assegnazioneAulaGruppo_c');
 const id_gruppo_update = $('#assegnazioneAulaGruppo_d');
 const id_collezione_add = $('#addDiscoCollezione_c');
@@ -14,28 +14,28 @@ const add_disco_collezione_form = $('#addDiscoCollezione_form_2')
 //END DICHIARAZIONE SELETTOR
 
 /*
-* 2: Elenco collezioni private di un utente
+* 2: Elenco CSV aule
 */
-function getCollezioniUtente() {
+function getCSVaule() {
     message("", "");
     clear();
-    toggleVisibility(collezioni_container);
+    toggleVisibility(aule_container);
 
     $.ajax({
-        url: "rest/collezioni/private",
+        url: "rest/aule/CSV",
         method: "GET",
         success: function (data) {
-            //data - lista di url di collezioni
-            collezione_result.children().remove();
+            //data - lista CSV aule
+            aula_result.children().remove();
             if (data.length > 0) {
-                getCollezioniUtility(data); //ottengo le collezioni e le inserisco nella tabella
-                message("Collezioni caricate.", "success");
+                getAuleUtility(data); // ottengo le aule e le inserisco nella tabella
+                message("CSV aule caricate.", "success");
             } else {
-                handleError("", "", "", "#collezione", "Non ci sono collezioni.");
+                handleError("", "", "", "#aula", "Non ci sono aule.");
             }
         },
         error: function (request, status, error) {
-            handleError(request, status, error, "#collezione", "Errore nel caricamento delle collezioni.");
+            handleError(request, status, error, "#aula", "Errore nel caricamento delle aule.");
         },
         cache: false,
     });
@@ -282,16 +282,16 @@ function populateDiscoCollezioneUpdateForm() {
 * Funzione Utility per Ottenere le collezioni
 * @param {List<URL>} data - Lista di URL delle collezioni
 */
-function getCollezioniUtility(data) {
+function getAuleUtility(data) {
     $.each(data, function (key) {
         $.ajax({
-            url: "rest/collezioni/" + data[key].split("/")[6],
+            url: "rest/aule/" + data[key].split("/")[6],
             method: "GET",
             success: function (data) {
-                populateCollezione(data);
+                populateAula(data);
             },
             error: function (request, status, error) {
-                handleError(request, status, error, "#collezione", "Errore generico");
+                handleError(request, status, error, "#aula", "Errore generico");
             },
             cache: false,
         });
@@ -299,21 +299,21 @@ function getCollezioniUtility(data) {
 }
 
 /*
-* Funzione Utility il riempimento della tabella delle collezioni
-* @param {Collezione} data - Collezione da inserire nella tabella
+* Funzione Utility il riempimento della tabella delle aule
+* @param {Aula} data - Aula da inserire nella tabella
 */
-function populateCollezione(data) {
+function populateAula(data) {
     if (data) {
-        //Se la collezione non è vuota viene inserita nella tabella.
-        collezione_result.show();
-        collezione_empty.hide();
+        //Se l Aula non è vuota viene inserita nella tabella.
+        aula_result.show();
+        aula_empty.hide();
 
-        collezione_result.append('<tr>')
-        collezione_result.append('<td>' + data['id'] + '</td>')
-        collezione_result.append('<td>' + data['titolo'] + '</td>')
-        collezione_result.append('<td>' + data['data_creazione'] + '</td>')
-        collezione_result.append('<td>' + data['privacy'] + '</td>')
-        collezione_result.append('</tr>')
+        aula_result.append('<tr>')
+        aula_result.append('<td>' + data['id'] + '</td>')
+        aula_result.append('<td>' + data['no'] + '</td>')
+        aula_result.append('<td>' + data['data_creazione'] + '</td>')
+        aula_result.append('<td>' + data['privacy'] + '</td>')
+        aula_result.append('</tr>')
     } else {
         //Se la collezione è vuota viene svuotata la tabella e viene mostrato un messaggio.
         collezione_result.children().remove();
@@ -354,5 +354,4 @@ function disableStatoConservazione(statoConservazione, selected) {
     }
     select_picker.selectpicker('refresh');
 }
-
 
