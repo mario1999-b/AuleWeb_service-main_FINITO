@@ -1,5 +1,6 @@
 /**
-    CSS per tutte le viste
+ * CSS per tutte le viste
+ * @author Davide De Acetis
  */
 
 .page-container {
@@ -150,17 +151,4 @@
         width: 100%; !important;
     }
 
-}
-.btn-dark:hover{
-    background-color: #343a40 !important;
-    border-color: #343a40 !important;
-}
-
-.btn-dark:focus {
-    box-shadow: 0 0 0 0.2rem #212529 !important;
-}
-.btn-dark {
-    color: #fff !important;
-    background-color: #2196F3 !important;
-    border-color: #343a40 !important;
 }
