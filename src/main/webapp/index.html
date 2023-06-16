@@ -133,7 +133,7 @@
                     <div class="filtro-list">
                         <dl class="filtro-info list-group list-group-flush">
                             <dd>
-                                <button class="btn btn-success btn-w-fixed" onclick="getCollezioniUtente()">
+                                <button class="btn btn-success btn-w-fixed" onclick="getCSVaule()">
                                     getCSVaule
                                 </button>
                             </dd>
@@ -213,29 +213,33 @@
                     </div>
                 </div>
             </div>
-            <!--END OPERAZIONI SULLE COLLEZIONI-->
+            <!--END OPERAZIONI SULLE AULE-->
 
             <div class="tables-container">
-                <!--TABELLA COLLEZIONI-->
-                <div class="table-container" id="collezioni-container" style="display: block">
+                <!--TABELLA AULE-->
+                <div class="table-container" id="aule-container" style="display: block">
                     <div class="title flex justify-between align-items-center">
-                        COLLEZIONI
+                        AULE
                     </div>
                     <div class="table-scrollable">
-                        <table class="table table-borderless table-striped" aria-label="Tabella Collezioni">
+                        <table class="table table-borderless table-striped" aria-label="Tabella Aule">
                             <thead class="table-dark">
                             <tr>
                                 <th scope="col">Id</th>
-                                <th scope="col">Titolo</th>
-                                <th scope="col">Data creazione</th>
-                                <th scope="col">Privacy</th>
+                                <th scope="col">nomeAula</th>
+                                <th scope="col">luogo</th>
+                                <th scope="col">piano</th>
+                                <th scope="col">emailResponsabile</th>
+                                <th scope="col">capienza</th>
+                                <th scope="col">edificio</th>
+
                             </tr>
                             </thead>
-                            <tbody id="collezione-result">
+                            <tbody id="aule-result">
 
                             </tbody>
                         </table>
-                        <div class="table-empty" id="collezione-empty">Non ci sono collezioni.</div>
+                        <div class="table-empty" id="aule-empty">Non ci sono aule.</div>
                     </div>
                 </div>
                 <!--END TABELLA COLLEZIONI-->
@@ -459,14 +463,9 @@
     <script src="res/js/auth.js"></script>
     <!-- SCRIPTS PER LE TAB -->
     <script src="res/js/tab.js"></script>
-    <!-- SCRIPTS PER LE COLLEZIONI -->
-    <script src="res/js/collezioni.js"></script>
-    <!-- SCRIPTS PER GLI AUTORI -->
-    <script src="res/js/autori.js"></script>
-    <!-- SCRIPTS PER I DISCHI -->
-    <script src="res/js/dischi.js"></script>
+    <!-- SCRIPTS PER LE AULE-->
+    <script src="res/js/aule.js"></script>
     <!-- SCRIPTS PER LE STATISTICHE -->
-    <script src="res/js/stats.js"></script>
     <!-- END SCRIPT -->
 
 </body>

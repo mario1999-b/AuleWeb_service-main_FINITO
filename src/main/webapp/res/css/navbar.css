@@ -1,6 +1,5 @@
 /**
  * CSS per la navbar
- * @author Davide De Acetis
  */
 
 .navbar {
@@ -25,7 +24,6 @@
 }
 /* ---------------------------------- */
 
-/* Rettangolo nero intorno ai pulsanti */
 .nav-square {
     height: 4rem;
     padding: 10px 10px;
