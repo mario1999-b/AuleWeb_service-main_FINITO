@@ -1,8 +1,4 @@
 /*
-* File di utility per tutte el operazioni.
-* @Author: Davide De Acetis
-* @Author: Raluca Mihaela Bujoreanu
-* @Author: Domenico Santone
 */
 
 const select_picker = $('.selectpicker');
@@ -83,82 +79,10 @@ function handleError(request, status, error, table, msg) {
 * Utility rimuove tutte le tabelle e le form sullo schermo.
 */
 function clear() {
-    collezioni_container.css('display', 'none');
-    collezione_result.hide();
-    update_disco_collezione_form.css('display', 'none');
-    add_disco_collezione_form.css('display', 'none');
+    aula_container.css('display', 'none');
+    aula_result.hide();
 
-    autori_container.css('display', 'none');
-    autore_result.hide();
-
-    dischi_container.css('display', 'none');
-    dischi_result.hide();
-
-    statistiche_container.css('display', 'none');
 }
 
 
-/*
-* Utility che controlla l'esistenza o le autorizzazioni per una collezione
-* @param {int} c - Id della collezione
-* @return {boolean} - True se l'utente ha i permessi per accedere alla collezione e la collezione esiste, false altrimenti
-*/
-function checkCollezione(c) {
-    let exist;
-    $.ajax({
-        url: "rest/collezioni/" + c,
-        async: false,
-        method: "GET",
-        success: function () {
-            exist = true;
-        },
-        error: function (request, status, error) {
-            switch (request.status) {
-                case 404:
-                    message("Collezione non trovata.", "error");
-                    break;
-                case 401:
-                    message("Non sei autorizzato a visualizzare questa collezione.", "error");
-                    break;
-                default:
-                    message("Errore nel caricamento della collezione.", "error");
-            }
-            exist = false;
-        },
-        cache: false,
-    });
-    return exist;
-}
 
-/*
-* Utility che controlla l'esistenza o le autorizzazioni per un disco di una collezione
-* @param {int} c - Id della collezione
-* @param {int} d - Id del disco
-* @return {boolean} - True se l'utente ha i permessi per accedere alla collezione e al disco, false altrimenti
-*/
-function checkDiscoCollezione(c, d) {
-    let exist;
-    $.ajax({
-        url: "rest/collezioni/" + c + "/dischi/" + d,
-        async: false,
-        method: "GET",
-        success: function () {
-            exist = true;
-        },
-        error: function (request, status, error) {
-            switch (request.status) {
-                case 404:
-                    message("Disco non trovato o non appartenente alla collezione.", "error");
-                    break;
-                case 401:
-                    message("Non sei autorizzato a visualizzare questa collezione.", "error");
-                    break;
-                default:
-                    message("Errore nel caricamento del disco.", "error");
-            }
-            exist = false;
-        },
-        cache: false,
-    });
-    return exist;
-}
