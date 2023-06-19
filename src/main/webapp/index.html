@@ -30,7 +30,6 @@
     <!-- Bootstrap core CSS -->
     <link href="res/css/bootstrap.min.css" rel="stylesheet" >
     <link href="res/css/bootstrap.rtl.min.css" rel="stylesheet" >
-    <link href="res/css/style.css" rel="stylesheet"/>
 
     <link href="res/css/navbar.css" rel="stylesheet"/>
 
@@ -39,8 +38,6 @@
     <link href="res/css/carosello.css" rel="stylesheet"/>
     <link href="res/css/filtro.css" rel="stylesheet"/>
     <link href="res/css/tabBar.css" rel="stylesheet"/>
-
-    <link href="res/css/stats.css" rel="stylesheet"/>
     <link href="res/css/search.css" rel="stylesheet"/>
     <!-- CSS -->
 
@@ -87,7 +84,6 @@
                  <button class="btn btn-outline-light me-2" id="tab-aule-btn">Aule</button>
                  <button class="btn btn-outline-light me-2" id="tab-eventi-btn">Eventi</button>
                  <button class="btn btn-outline-light me-2" id="tab-gruppi-btn">Gruppi</button>
-                 <button class="btn btn-outline-light me-2" id="tab-dipartimenti-btn">Dipartimenti</button>
             </ul>
             </div>
             <div class="login-form" id="login">
@@ -133,36 +129,24 @@
                     <div class="filtro-list">
                         <dl class="filtro-info list-group list-group-flush">
                             <dd>
-                                <button class="btn btn-success btn-w-fixed" onclick="getCSVaule()">
-                                    getCSVaule
+                                <button class="btn btn-success btn-w-fixed" onclick="toggleVisibility($('#getAula_form'))">
+                                    getInfAula
                                 </button>
-                            </dd>
-
-                                <button class="btn btn-primary btn-w-fixed"
-                                        onclick="toggleVisibility($('#assegnazioneAulaGruppo_form_1'))">Assegnazione aula ad un gruppo
-                                </button>
-                                <div class="hidden" id="assegnazioneAulaGruppo_form_1">
+                                <div class="hidden" id="getAula_form">
                                     <div class="horizontal-separator filtro-horizontal-separator"></div>
                                     <div class="flex justify-between">
-                                        <label for="assegnazioneAulaGruppo_c">ID Aula</label>
-                                        <input class="input-small" type="number" min="1" name="assegnazioneAulaGruppo_c"
-                                               id="assegnazioneAulaGruppo_c" placeholder="id aula">
+                                        <label for="getAula">ID aula</label>
+                                        <input class="input-small" type="number" min="1" name="getAula"
+                                               id="getAula"
+                                               placeholder="id aula">
                                     </div>
-                                    <div class="flex justify-between mt-1">
-                                        <label for="assegnazioneAulaGruppo_d">ID Gruppo</label>
-                                        <input class="input-small" type="number" min="1" name="assegnazioneAulaGruppo_d"
-                                               id="assegnazioneAulaGruppo_d" placeholder="id gruppo">
-                                    </div>
-
                                     <div class="flex justify-center mt-3" style="width: 100%;">
-                                        <button onclick="gruppoForm('update')" class="btn btn-warning">
-                                            Aggiorna gruppo
+                                        <button onclick="getInfAula($('#getAula').val())" class="btn btn-warning">
+                                            Trova
                                         </button>
                                     </div>
                                     <div class="horizontal-separator filtro-horizontal-separator"></div>
                                 </div>
-                            </dd>
-
                         </dl>
                     </div>
                 </div>
@@ -182,10 +166,9 @@
                                 <th scope="col">Id</th>
                                 <th scope="col">nomeAula</th>
                                 <th scope="col">luogo</th>
-                                <th scope="col">piano</th>
-                                <th scope="col">emailResponsabile</th>
-                                <th scope="col">capienza</th>
                                 <th scope="col">edificio</th>
+                                <th scope="col">emailResponsabile</th>
+                                <th scope="col">gruppo</th>
 
                             </tr>
                             </thead>

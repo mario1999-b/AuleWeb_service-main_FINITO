@@ -15,6 +15,8 @@ public class JacksonExceptionMapper implements ExceptionMapper<JsonMappingExcept
     @Override
     public Response toResponse(JsonMappingException exception) {
         //utile per catturare tutte le eccezioni derivanti dalla serializzazione/deserializzazione automatica di oggetti
+        System.out.println(exception.getMessage());
         return Response.status(Response.Status.BAD_REQUEST).entity("Invalid JSON").build();
+
     }
 }

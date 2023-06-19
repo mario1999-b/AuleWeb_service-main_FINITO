@@ -2,10 +2,10 @@ package org.univaq.swa.model;
 
 public class Gruppo {
     private int id;
-    private Dipartimento nome;
+    private String nome;
     private String descrizione;
 
-    public Gruppo(int id, Dipartimento nome, String descrizione) {
+    public Gruppo(int id, String nome, String descrizione) {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
@@ -19,11 +19,11 @@ public class Gruppo {
         this.id = id;
     }
 
-    public Dipartimento getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(Dipartimento nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 

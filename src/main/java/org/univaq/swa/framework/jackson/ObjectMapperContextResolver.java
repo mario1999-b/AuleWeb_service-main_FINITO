@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.util.Calendar;
+
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.ws.rs.ext.ContextResolver;
 import jakarta.ws.rs.ext.Provider;
 
@@ -37,6 +39,7 @@ public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper
         customSerializer.addDeserializer(Calendar.class, new JavaCalendarDeserializer());
 
         mapper.registerModule(customSerializer);
+        mapper.registerModule(new JavaTimeModule());
 
         return mapper;
     }

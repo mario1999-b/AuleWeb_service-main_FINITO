@@ -1,34 +1,39 @@
 package org.univaq.swa.model;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class Evento {
-    private String nomeCorso;
-    private Tipologia tipologia;
+    private int id;
+    private String nomeEvento;
     private String descrizioneEvento;
     private String nomeResponsabile;
     private String emailResponsabile;
+     private LocalDate dataEvento;
 
-    public Evento(String nomeCorso, Tipologia tipologia, String descrizioneEvento, String nomeResponsabile, String emailResponsabile) {
-        this.nomeCorso = nomeCorso;
-        this.tipologia = tipologia;
+    public Evento(int id, String nomeEvento, String descrizioneEvento, String nomeResponsabile, String emailResponsabile, LocalDate dataEvento) {
+        this.id = id;
+        this.nomeEvento = nomeEvento;
         this.descrizioneEvento = descrizioneEvento;
         this.nomeResponsabile = nomeResponsabile;
         this.emailResponsabile = emailResponsabile;
+        this.dataEvento = dataEvento;
     }
 
-    public String getNomeCorso() {
-        return nomeCorso;
+    public int getId() {
+        return id;
     }
 
-    public void setNomeCorso(String nomeCorso) {
-        this.nomeCorso = nomeCorso;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Tipologia getTipologia() {
-        return tipologia;
+    public String getNomeEvento() {
+        return nomeEvento;
     }
 
-    public void setTipologia(Tipologia tipologia) {
-        this.tipologia = tipologia;
+    public void setNomeEvento(String nomeEvento) {
+        this.nomeEvento = nomeEvento;
     }
 
     public String getDescrizioneEvento() {
@@ -54,4 +59,14 @@ public class Evento {
     public void setEmailResponsabile(String emailResponsabile) {
         this.emailResponsabile = emailResponsabile;
     }
+
+    public LocalDate getDataEvento() {
+        return dataEvento;
+    }
+
+    public void setDataEvento(LocalDate dataEvento) {
+        this.dataEvento = dataEvento;
+    }
+
+
 }
