@@ -12,6 +12,8 @@ import java.util.logging.Logger;
  * qui tutto è finto, non usiamo JWT o altre tecnologie
  *
  */
+
+
 public class AuthHelpers {
     Class c = Class.forName("org.postgresql.Driver");
     Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/aule_web","postgres","root");
@@ -27,8 +29,13 @@ public class AuthHelpers {
             stmt.setString(1, username);
             stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
-                rs.next();
-                return true;
+                Boolean v = rs.next();
+                if(v){
+                    return true;
+                } else{
+                    return false;
+                }
+
             }
         } catch (SQLException e) {
             return false;
@@ -40,15 +47,17 @@ public class AuthHelpers {
         return token;
     }
 
+
     public void revokeToken(String token) {
         /* invalidate il token */
-        try (PreparedStatement stmt = con.prepareStatement("UPDATE boss SET token = NULL WHERE token = ?")) {
+       try (PreparedStatement stmt = con.prepareStatement("UPDATE boss SET token = NULL WHERE token = ?")) {
             stmt.setString(1, token);
             stmt.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(AuthenticationRes.class.getName()).severe(e.getMessage());
         }
     }
+
 
     public String validateToken(String token) {
         return "pippo"; //lo username andrebbe derivato dal token!

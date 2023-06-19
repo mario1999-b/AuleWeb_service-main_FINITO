@@ -50,7 +50,9 @@ public class AuthenticationRes {
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + authToken).build();
             }
         } catch (Exception e) {
+            System.out.println("ERRORE"+e.getMessage());
             //logging dell'errore
+            // TODO return status 500
         }
         return Response.status(UNAUTHORIZED).build();
     }

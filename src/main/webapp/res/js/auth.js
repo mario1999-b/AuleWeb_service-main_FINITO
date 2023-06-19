@@ -1,7 +1,5 @@
 /*
-* File per l'autenticazione.
-* @Author: Davide De Acetis
-* @Author: Raluca Mihaela Bujoreanu
+File per l'autenticazione.
 */
 
 $(document).ready(function () {
@@ -47,6 +45,7 @@ $(document).ready(function () {
             },
             cache: false,
         });
+
     });
 
     // Send logout request
