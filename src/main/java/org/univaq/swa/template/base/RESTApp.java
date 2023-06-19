@@ -10,6 +10,7 @@ import org.univaq.swa.framework.jackson.ObjectMapperContextResolver;
 import org.univaq.swa.template.exceptions.AppExceptionMapper;
 import org.univaq.swa.framework.security.CORSFilter;
 import org.univaq.swa.template.resources.AuleRes;
+import org.univaq.swa.template.resources.EventoRes;
 import org.univaq.swa.template.resources.SimpleRes;
 import org.univaq.swa.framework.security.AuthenticationRes;
 import org.univaq.swa.framework.security.AuthLoggedFilter;
@@ -30,6 +31,9 @@ public class RESTApp extends Application {
         //con l'annotazione Path) che vogliamo pubblicare
         //c.add(SimpleRes.class);
         c.add(AuleRes.class);
+
+        c.add(EventoRes.class);
+
         c.add(AuthenticationRes.class);
 
         //aggiungiamo il provider Jackson per poter
