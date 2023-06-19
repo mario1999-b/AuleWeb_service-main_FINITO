@@ -3,18 +3,23 @@ package org.univaq.swa.model;
 public class Aula {
     private int id;
     private String nome;
-    private Posizione posizione;
-    private ListaAttrezzature listaAttrezzature;
+    private String luogo;
+    private String edificio;
     private String emailResponsabile;
-    private int numeroPreseElettriche;
+    private Gruppo gruppo;
 
-    public Aula(int id, String nome, Posizione posizione, ListaAttrezzature listaAttrezzature, String emailResponsabile, int numeroPreseElettriche) {
+    public Aula(int id, String nome, String luogo, String edificio, String emailResponsabile, Gruppo gruppo) {
         this.id = id;
         this.nome = nome;
-        this.posizione = posizione;
-        this.listaAttrezzature = listaAttrezzature;
+        this.luogo = luogo;
+        this.edificio = edificio;
         this.emailResponsabile = emailResponsabile;
-        this.numeroPreseElettriche = numeroPreseElettriche;
+        this.gruppo = gruppo;
+    }
+
+    public Aula(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
     }
 
     public int getId() {
@@ -33,20 +38,20 @@ public class Aula {
         this.nome = nome;
     }
 
-    public Posizione getPosizione() {
-        return posizione;
+    public String getLuogo() {
+        return luogo;
     }
 
-    public void setPosizione(Posizione posizione) {
-        this.posizione = posizione;
+    public void setLuogo(String luogo) {
+        this.luogo = luogo;
     }
 
-    public ListaAttrezzature getListaAttrezzature() {
-        return listaAttrezzature;
+    public String getEdificio() {
+        return edificio;
     }
 
-    public void setListaAttrezzature(ListaAttrezzature listaAttrezzature) {
-        this.listaAttrezzature = listaAttrezzature;
+    public void setEdificio(String edificio) {
+        this.edificio = edificio;
     }
 
     public String getEmailResponsabile() {
@@ -57,11 +62,11 @@ public class Aula {
         this.emailResponsabile = emailResponsabile;
     }
 
-    public int getNumeroPreseElettriche() {
-        return numeroPreseElettriche;
+    public Gruppo getGruppo() {
+        return gruppo;
     }
 
-    public void setNumeroPreseElettriche(int numeroPreseElettriche) {
-        this.numeroPreseElettriche = numeroPreseElettriche;
+    public void setGruppo(Gruppo gruppo) {
+        this.gruppo = gruppo;
     }
 }
