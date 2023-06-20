@@ -128,6 +128,7 @@
                 <div class="filtro">
                     <div class="filtro-list">
                         <dl class="filtro-info list-group list-group-flush">
+                            <!-- GET AULA BY ID -->
                             <dd>
                                 <button class="btn btn-success btn-w-fixed" onclick="toggleVisibility($('#getAula_form'))">
                                     getInfAula
@@ -148,6 +149,7 @@
                                     <div class="horizontal-separator filtro-horizontal-separator"></div>
                                 </div>
                             </dd>
+                            <!-- ATTREZZATURE AULA -->
                             <dd>
                                 <button class="btn btn-success btn-w-fixed" onclick="toggleVisibility($('#getAttAula_form'))">
                                     getListAttAula
@@ -168,12 +170,64 @@
                                     <div class="horizontal-separator filtro-horizontal-separator"></div>
                                 </div>
                             </dd>
+                            <!-- INSERIMENTO NUOVA AULA -->
+                            <dd>
+                                <button class="btn btn-success btn-w-fixed" onclick="toggleVisibility($('#postAula_form'))">
+                                    getListAttAula
+                                </button>
+                                <div class="hidden" id="postAula_form">
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                        <div id="postAula">
+                                            <div class="flex justify-between">
+                                                <label for="nomeAula">nome aula</label>
+                                                <input class="input-small" type="text" name="nomeAula"
+                                                       id="nomeAula"
+                                                       placeholder="nome aula">
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <label for="luogo">luogo</label>
+                                                <input class="input-small" type="text" name="luogo"
+                                                       id="luogo"
+                                                       placeholder="luogo">
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <label for="piano">piano</label>
+                                                <input class="input-small" type="text" name="piano"
+                                                       id="piano"
+                                                       placeholder="piano">
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <label for="emailResponsabile">email Responsabile</label>
+                                                <input class="input-small" type="text" name="emailResponsabile"
+                                                       id="emailResponsabile"
+                                                       placeholder="emailResponsabile">
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <label for="gruppo">gruppo</label>
+                                                <input class="input-small" type="text" name="gruppo"
+                                                       id="gruppo"
+                                                       placeholder="gruppo">
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <label for="idAttrezzature">id attrezzature</label>
+                                                <input class="input-small" type="number" min="1" name="idAttrezzature"
+                                                       id="idAttrezzature"
+                                                       placeholder="idAttrezzature">
+                                            </div>
+                                        </div>
+                                    <div class="flex justify-center mt-3" style="width: 100%;">
+                                        <button onclick="inserimentoAula($('#postAula').val())" class="btn btn-warning">
+                                            Trova
+                                        </button>
+                                    </div>
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                </div>
+                            </dd>
+                            <!-- ALTRA OPERAZIONE -->
                         </dl>
                     </div>
                 </div>
             </div>
-            <!--END OPERAZIONI SULLE AULE-->
-
             <div class="tables-container">
                 <!--TABELLA AULE-->
                 <div class="table-container" id="aule-container" style="display: block">
@@ -223,7 +277,11 @@
                     </div>
                 </div>
             </div>
+
+
+            </div>
         </div>
+
     </div>
 
 

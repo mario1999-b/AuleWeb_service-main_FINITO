@@ -117,3 +117,5 @@ function populateAttrezzature(data) {
     }
     attrezzature_empty.text("Non ci sono attrezzature.");
 }
+
+// OP.3 INSERIMENTO DI UNA NUOVA AULA
