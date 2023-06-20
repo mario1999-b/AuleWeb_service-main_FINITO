@@ -147,6 +147,27 @@
                                     </div>
                                     <div class="horizontal-separator filtro-horizontal-separator"></div>
                                 </div>
+                            </dd>
+                            <dd>
+                                <button class="btn btn-success btn-w-fixed" onclick="toggleVisibility($('#getAttAula_form'))">
+                                    getListAttAula
+                                </button>
+                                <div class="hidden" id="getAttAula_form">
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                    <div class="flex justify-between">
+                                        <label for="getAttAula">ID aula</label>
+                                        <input class="input-small" type="number" min="1" name="getAttAula"
+                                               id="getAttAula"
+                                               placeholder="id aula">
+                                    </div>
+                                    <div class="flex justify-center mt-3" style="width: 100%;">
+                                        <button onclick="getListAttAula($('#getAttAula').val())" class="btn btn-warning">
+                                            Trova
+                                        </button>
+                                    </div>
+                                    <div class="horizontal-separator filtro-horizontal-separator"></div>
+                                </div>
+                            </dd>
                         </dl>
                     </div>
                 </div>
@@ -179,9 +200,28 @@
                         <div class="table-empty" id="aule-empty">Non ci sono aule.</div>
                     </div>
                 </div>
+                <!-- TABELLA ATTREZZATURE -->
+                <div class="table-container" id="attrezzature-container" style="display: block">
+                    <div class="title flex justify-between align-items-center">
+                        ATTREZZATURE
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-borderless table-striped" aria-label="Tabella Attrezzature">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Numero tavoli</th>
+                                <th scope="col">Numero sedie</th>
+                                <th scope="col">Numero lavagne</th>
+                            </tr>
+                            </thead>
+                            <tbody id="attrezzature-result">
 
-
-
+                            </tbody>
+                        </table>
+                        <div class="table-empty" id="attrezzature-empty">Non ci sono attrezzature.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

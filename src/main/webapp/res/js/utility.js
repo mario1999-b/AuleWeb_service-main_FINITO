@@ -80,9 +80,12 @@ function handleError(request, status, error, table, msg) {
 */
 function clear() {
     aula_container.css('display', 'none');
-    aula_result.hide();
+    $(aula_result).hide();
+    attrezzature_container.css('display','none');
+    $(attrezzature_result).hide();
 
 }
+
 
 
 
