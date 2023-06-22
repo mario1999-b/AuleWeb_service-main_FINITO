@@ -8,6 +8,9 @@
 const aula_result = $('#aule-result');
 const aula_empty = $('#aule-empty');
 const aula_container = $('#aule-container');
+const aula_csv_result = $('#aule-csv-result');
+const aula_csv_empty = $('#aule-csv-empty');
+const aula_csv_container = $('#aule-csv-container');
 const attrezzature_result = $('#attrezzature-result')
 const attrezzature_empty = $('#attrezzature-empty');
 const attrezzature_container = $('#attrezzature-container');
@@ -16,7 +19,7 @@ const attrezzature_container = $('#attrezzature-container');
 
 
 // OP.5 INFORMAZIONI DI BASE DI UN AULA
-function getInfAula(val){
+function getInfAula(val) {
     message("", "");
     clear();
     toggleVisibility(aula_container);
@@ -27,12 +30,12 @@ function getInfAula(val){
             method: "GET",
             success: function (data) {
                 //data - aula
-                 $(aula_result).children().remove();
+                $(aula_result).children().remove();
                 message("Aula caricata.", "success");
                 populateAula(data); //popolo la tabella con l'aula
             },
             error: function (request, status, error) {
-                handleError(request, status, error, "#aula", "Errore nel caricamento della collezione.");
+                handleError(request, status, error, "#aula", "Errore nel caricamento dell aula.");
             },
             cache: false,
         });
@@ -55,9 +58,10 @@ function populateAula(data) {
         aula_result.append('<td>' + data['id'] + '</td>')
         aula_result.append('<td>' + data['nome'] + '</td>')
         aula_result.append('<td>' + data['luogo'] + '</td>')
-        aula_result.append('<td>' + data['edificio'] + '</td>')
+        aula_result.append('<td>' + data['piano'] + '</td>')
         aula_result.append('<td>' + data['emailResponsabile'] + '</td>')
-        aula_result.append('<td>' + data['gruppo'] + '</td>')
+        aula_result.append('<td>' + data['idGruppo'] + '</td>')
+        aula_result.append('<td>' + data['idAttrezzature'] + '</td>')
         aula_result.append('</tr>')
     } else {
         //Se l'aula è vuota viene svuotata la tabella e viene mostrato un messaggio.
@@ -68,7 +72,7 @@ function populateAula(data) {
 }
 
 // OP.5 ATTREZZATURE DI UN AULA
-function getListAttAula(val){
+function getListAttAula(val) {
     message("", "");
     clear();
     toggleVisibility(attrezzature_container);
@@ -105,10 +109,10 @@ function populateAttrezzature(data) {
         attrezzature_empty.hide();
 
         attrezzature_result.append('<tr>')
-        attrezzature_result.append('<td>' + data['id'] + '</td>')
-        attrezzature_result.append('<td>' + data['n_tavoli'] + '</td>')
-        attrezzature_result.append('<td>' + data['n_sedie'] + '</td>')
-        attrezzature_result.append('<td>' + data['n_lavagne'] + '</td>')
+        attrezzature_result.append('<td>' + data['idAttrezzature'] + '</td>')
+        attrezzature_result.append('<td>' + data['numeroLavagna'] + '</td>')
+        attrezzature_result.append('<td>' + data['numeroSedie'] + '</td>')
+        attrezzature_result.append('<td>' + data['numeroTavolo'] + '</td>')
         attrezzature_result.append('</tr>')
     } else {
         //Se l'aula è vuota viene svuotata la tabella e viene mostrato un messaggio.
@@ -118,4 +122,102 @@ function populateAttrezzature(data) {
     attrezzature_empty.text("Non ci sono attrezzature.");
 }
 
+
 // OP.3 INSERIMENTO DI UNA NUOVA AULA
+function inserimentoAula() {
+    message("", "");
+    clear();
+    toggleVisibility(aula_container);
+
+
+    $.ajax({
+        url: "rest/aule",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({
+            nome: $('#nomeAula_add').val(),
+            luogo: $('#luogo_add').val(),
+            piano: $('#piano_add').val(),
+            emailResponsabile: $('#emailResponsabile_add').val(),
+            idGruppo: $('#gruppo_add').val(),
+            idAttrezzature: $('#idAttrezzature_add').val()
+        }),
+        success: function (data) {
+            aula_result.children().remove();
+            clear();
+            message("Nuova aula inserita.", "success");
+        },
+        error: function (request, status, error) {
+            handleError(request, status, error, "#aula", "Errore nel caricamento della collezione.");
+        },
+        cache: false,
+    });
+
+}
+
+// OP.2 ESPORTAZIONE CSV
+function getCsvAule() {
+    message("", "");
+    clear();
+    toggleVisibility(aula_csv_container);
+
+    $.ajax({
+        url: "rest/aule/CSV",
+        method: "GET",
+        success: function (data) {
+            //data - aula
+            $(aula_csv_result).children().remove();
+             populateAulaCsv(data);
+            message("Attrezzatura caricata.", "success");
+        },
+        error: function (request, status, error) {
+            handleError(request, status, error, "#attrezzature", "Errore nel caricamento delle aule.");
+        },
+        cache: false,
+    });
+
+}
+function populateAulaCsv(data) {
+    if (data) {
+        aula_csv_result.show();
+        aula_csv_empty.hide();
+
+        aula_csv_result.append('<tr>')
+        aula_csv_result.append('<td>' + data + '</td>')
+        aula_result.append('</tr>')
+    } else {
+        //Se l'aula è vuota viene svuotata la tabella e viene mostrato un messaggio.
+        $(aula_csv_result).children().remove();
+        aula_csv_empty.show();
+    }
+    aula_csv_empty.text("Non ci sono aule.");
+
+}
+
+// OP.4 ASSEGNAZIONE DI UN'AULA AD UN GRUPPO
+
+function assegnazioneAulaToGruppo() {
+    message("", "");
+    clear();
+    toggleVisibility(aula_container);
+
+    $.ajax({
+        url: "rest/aule/{id_aula}/gruppo/{id_gruppo}",
+        method: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({
+            id: $('#idAulaPut').val(),
+            idGruppo: $('#idGruppoPut').val()
+        }),
+        success: function (data) {
+            aula_result.children().remove();
+            clear();
+            message("Gruppo assegnato.", "success");
+        },
+        error: function (request, status, error) {
+            handleError(request, status, error, "#aula", "Errore nel caricamento.");
+        },
+        cache: false,
+    });
+
+}

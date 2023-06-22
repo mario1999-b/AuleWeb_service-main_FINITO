@@ -12,6 +12,8 @@ import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.NewCookie;
 import jakarta.ws.rs.core.Response;
+
+import static jakarta.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
 import static jakarta.ws.rs.core.Response.Status.UNAUTHORIZED;
 import jakarta.ws.rs.core.UriInfo;
 import org.univaq.swa.framework.security.AuthHelpers;
@@ -52,7 +54,7 @@ public class AuthenticationRes {
         } catch (Exception e) {
             System.out.println("ERRORE"+e.getMessage());
             //logging dell'errore
-            // TODO return status 500
+            return Response.status(INTERNAL_SERVER_ERROR).build();
         }
         return Response.status(UNAUTHORIZED).build();
     }

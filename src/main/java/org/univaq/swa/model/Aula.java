@@ -4,22 +4,25 @@ public class Aula {
     private int id;
     private String nome;
     private String luogo;
-    private String edificio;
+    private String piano;
     private String emailResponsabile;
-    private Gruppo gruppo;
+    private Integer idGruppo;
+    private int idAttrezzature;
 
-    public Aula(int id, String nome, String luogo, String edificio, String emailResponsabile, Gruppo gruppo) {
+    public Aula(int id, String nome, String luogo, String piano, String emailResponsabile, Integer idGruppo, int idAttrezzature) {
         this.id = id;
         this.nome = nome;
         this.luogo = luogo;
-        this.edificio = edificio;
+        this.piano = piano;
         this.emailResponsabile = emailResponsabile;
-        this.gruppo = gruppo;
+        this.idGruppo = idGruppo;
+        this.idAttrezzature = idAttrezzature;
     }
 
-    public Aula(int id, String nome) {
+    public Aula(int id, String nome,Integer idGruppo) {
         this.id = id;
         this.nome = nome;
+        this.idGruppo= idGruppo;
     }
 
     public int getId() {
@@ -46,12 +49,12 @@ public class Aula {
         this.luogo = luogo;
     }
 
-    public String getEdificio() {
-        return edificio;
+    public String getPiano() {
+        return piano;
     }
 
-    public void setEdificio(String edificio) {
-        this.edificio = edificio;
+    public void setPiano(String piano) {
+        this.piano = piano;
     }
 
     public String getEmailResponsabile() {
@@ -62,11 +65,31 @@ public class Aula {
         this.emailResponsabile = emailResponsabile;
     }
 
-    public Gruppo getGruppo() {
-        return gruppo;
+    public int getIdAttrezzature() {
+        return idAttrezzature;
+    }
+    public void setIdAttrezzature(int idAttrezzature) {
+        this.idAttrezzature = idAttrezzature;
     }
 
-    public void setGruppo(Gruppo gruppo) {
-        this.gruppo = gruppo;
+    public Integer getIdGruppo() {
+        return idGruppo;
+    }
+
+    public void setIdGruppo(Integer idGruppo) {
+        this.idGruppo = idGruppo;
+    }
+
+    @Override
+    public String toString() {
+        return
+                 id +
+                "," + nome  +
+                "," + luogo  +
+                "," + piano +
+                "," + emailResponsabile +
+                "," + idGruppo +
+                "," + idAttrezzature +
+                         ";" + "\n";
     }
 }
