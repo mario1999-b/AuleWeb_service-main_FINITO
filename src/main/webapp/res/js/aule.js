@@ -45,7 +45,7 @@ function getInfAula(val) {
 }
 
 /*
- Funzione Utility per il riempimento della tabella delle aule
+ Funzione per il riempimento della tabella delle aule
  */
 
 
@@ -88,7 +88,7 @@ function getListAttAula(val) {
                 populateAttrezzature(data); //popolo la tabella con l'attrezzatura
             },
             error: function (request, status, error) {
-                handleError(request, status, error, "#attrezzature", "Errore nel caricamento della collezione.");
+                handleError(request, status, error, "#attrezzature", "Errore nel caricamento");
             },
             cache: false,
         });
@@ -98,7 +98,7 @@ function getListAttAula(val) {
 }
 
 /*
- Funzione Utility per il riempimento della tabella delle attrezzature
+ Funzione per il riempimento della tabella delle attrezzature
  */
 
 
@@ -148,7 +148,7 @@ function inserimentoAula() {
             message("Nuova aula inserita.", "success");
         },
         error: function (request, status, error) {
-            handleError(request, status, error, "#aula", "Errore nel caricamento della collezione.");
+            handleError(request, status, error, "#aula", "Errore nel caricamento");
         },
         cache: false,
     });
@@ -162,7 +162,7 @@ function getCsvAule() {
     toggleVisibility(aula_csv_container);
 
     $.ajax({
-        url: "rest/aule/CSV",
+        url: "rest/aule/esport/CSV",
         method: "GET",
         success: function (data) {
             //data - aula
@@ -194,25 +194,29 @@ function populateAulaCsv(data) {
 
 }
 
-// OP.4 ASSEGNAZIONE DI UN'AULA AD UN GRUPPO
 
-function assegnazioneAulaToGruppo() {
+// OP. 4 ASSEGNAZIONE AULA A GRUPPO
+function assegnazioneAulaToGruppo(idAula,idGruppo) {
     message("", "");
     clear();
     toggleVisibility(aula_container);
 
+    var idAula = $('#idAulaPut').val();
+    var idGruppo = $('#idGruppoPut').val();
+
     $.ajax({
-        url: "rest/aule/{id_aula}/gruppo/{id_gruppo}",
+        url: "rest/aule/" + idAula + "/gruppo/" + idGruppo,
         method: "PUT",
         contentType: "application/json",
         data: JSON.stringify({
-            id: $('#idAulaPut').val(),
-            idGruppo: $('#idGruppoPut').val()
+            id: idAula,
+            idGruppo: idGruppo
+
         }),
         success: function (data) {
             aula_result.children().remove();
             clear();
-            message("Gruppo assegnato.", "success");
+            message("assegnato con successo.", "success");
         },
         error: function (request, status, error) {
             handleError(request, status, error, "#aula", "Errore nel caricamento.");
@@ -220,4 +224,23 @@ function assegnazioneAulaToGruppo() {
         cache: false,
     });
 
+}
+
+// OP.2 IMPORTAZIONE CSV
+function inserimentoCsvAule() {
+    var formData = new FormData();
+    formData.set("csvInputFile", $('#csvFile')[0].files[0]);
+    $.ajax({
+        url: 'rest/aule/import/CSV',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            alert('Importazione CSV completata');
+        },
+        error: function () {
+            alert('Errore durante l\'importazione CSV');
+        }
+    });
 }

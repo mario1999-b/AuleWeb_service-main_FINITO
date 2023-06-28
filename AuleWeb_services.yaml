@@ -20,10 +20,10 @@ paths:
               properties:
                 username:
                   type: string
-                  example: "Admin"
+                  example: "NomeAdmin1"
                 password:
                   type: string
-                  example: "Password"
+                  example: "PasswordAdmin1"
       responses:
         '200':
           description: successful login
@@ -49,17 +49,66 @@ paths:
       security:
         - bearerAuth: [ ]
       responses:
-        '200':
+        '204':
           description: successful logout
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':
           $ref: '#/components/responses/GeneralError'
 
-#3
+#2 ESPORTAZIONE CSV
+  '/rest/aule/CSV':
+    get:
+      operationId: getCsvAule
+      tags:
+        - aule
+      security:
+        - bearerAuth: [ ]
+
+      responses:
+        '200':
+          description: CSV ottenuti
+          content:
+            text/csv:
+              schema:
+                type: array
+                items:
+                  type: string
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        '500':
+          $ref: "#/components/responses/GeneralError"
+
+#2 IMPORTAZIONE CSV
+  '/rest/aule/import/CSV':
+    post:
+      operationId: inserimentoCsvAule
+      tags:
+        - aule
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        content:
+          multipart/form-data:
+           schema:
+             type: file
+             $ref: '#/components/schemas/AulaCsv'
+      responses:
+        '200':
+          description: import aule tramite CSV
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Aula'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+
+  #3 INSERIMENTO DI UNA NUOVA AULA
   '/rest/aule/':
     post:
-      operationId: aggiungiAula
+      operationId: inserimentoAula
       tags:
         - aule
       security:
@@ -71,13 +120,7 @@ paths:
               $ref: '#/components/schemas/Aula'
       responses:
         '201':
-          description: Aula aggiunta
-          headers:
-            location:
-              description: url del aula aggiunta
-              schema:
-                type: string
-                format: uri
+          description: inserimento aula
           content:
             application/json:
               schema:
@@ -87,13 +130,11 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '500':
           $ref: '#/components/responses/GeneralError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
 
-#4
-  '/rest/aule/{id_aula}/gruppi/{id_gruppo}':
+#OP.4 ASSEGNAZIONE DI UN'AULA AD UN GRUPPO
+  '/rest/aule/{id_aula}/gruppo/{id_gruppo}':
     put:
-      operationId: assegnazioneAulaGruppo
+      operationId: putAulaToGruppo
       tags:
         - aule
       security:
@@ -109,22 +150,270 @@ paths:
           required: true
           schema:
             type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Aula'
+
       responses:
         '204':
-          description: Aula assegnata al gruppo specificato
+          description: no content
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':
           $ref: '#/components/responses/GeneralError'
+
+#5 LETTURA DELLE INFORMAZIONI DI BASE DI UN'AULA
+  '/rest/aule/{id}':
+    get:
+      operationId: getInfAula
+      tags:
+        - aule
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Informazione di base di un'aula
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AulaBase'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+
+#6 LISTA DELLE ATTREZZATURE PRESENTI IN AULA
+  '/rest/aule/{id}/attrezzature':
+    get:
+      operationId: getListaAttAula
+      tags:
+        - aule
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Attrezzature aula
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attrezzature'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+
+#7 INSERIMENTO DI UN NUOVO EVENTO
+  '/rest/evento/':
+    post:
+      operationId: inserimentoEvento
+      tags:
+        - evento
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Evento'
+      responses:
+        '201':
+          description: inserimento evento
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uri
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+
+#8 MODIFICA DI UN EVENTO
+  '/rest/evento/{id_evento}/{id_evento_aula}/{data_evento}':
+    put:
+      operationId: modificaEvento
+      tags:
+        - evento
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: id_evento
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id_evento_aula
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: data_evento
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '204':
+          description: no content
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+
+#9 LETTURA DELLE INFORMAZIONI DI UN EVENTO
+  '/rest/evento/{id}':
+    get:
+      operationId: getInformazioniEvento
+      tags:
+        - evento
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: informazioni evento
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evento'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+
+#10 LISTA DEGLI EVENTI ASSOCIATI AD UNA SPECIFICA AULA IN UNA DETERMINATA SETTIMANA
+  '/rest/evento/{id_aula}/{data_inizio}/{data_fine}':
+    get:
+      operationId: getListaEventiByAulaAndDate
+      tags:
+        - evento
+      parameters:
+        - name: id_aula
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: data_inizio
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: data_fine
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: informazioni evento
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+
+#11 LISTA DEGLI EVENTI ATTUALI E QUELLI DELLE PROSSIME 3 ORE
+  '/rest/evento/eventiInCorso':
+    get:
+      operationId: getEventiInCorso
+      tags:
+        - evento
+      responses:
+        '200':
+          description: eventi in corso e eventi prossime 3 ore
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
         '404':
           $ref: '#/components/responses/NotFoundError'
 
-#5
+#12 ESPORTAZIONE TRAMITE ICALENDAR
+  '/rest/evento/icalendar/esporta/{data_inizio}/{data_fine}':
+    get:
+      operationId: exportIcalendar
+      tags:
+        - evento
+      parameters:
+        - name: data_inizio
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: data_fine
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: esport eventi in formato icalendar
+          content:
+            multipart/form-data:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventoIcalendar'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -187,7 +476,7 @@ components:
         text/plain:
           schema:
             type: string
-            example: "Richiestaa non valida"
+            example: "Richiesta non valida"
     Forbidden:
       description: operazione non permessa
       content:
@@ -202,31 +491,23 @@ components:
         id:
           type: integer
           format: int32
-          readOnly: true
-        nome:
+        nomeAula:
           type: string
           example: "C 1.10"
-        posizione:
-          type: object
-          properties:
-            luogo:
-              $ref: '#/components/schemas/Luogo'
-            edificio:
-              $ref: '#/components/schemas/Edificio'
-            piano:
-              $ref: '#/components/schemas/Piano'
+        luogo:
+          type: string
+          example: "Coppito 1"
         emailResponsabile:
           type: string
           example: "responsabileAula@gmail.com"
-        listaAttrezzature:
-          $ref: '#/components/schemas/ListaAttrezzature'
-        numeroPreseElettriche:
+        idAttrezzature:
           type: integer
           format: int32
-          readOnly: true
-          example: "4"
-        gruppo:
-          $ref: "#/components/schemas/Gruppo"
+          description: id relativo alle attrezzature corrispondenti
+        idGruppo:
+          type: integer
+          format: int32
+          description: id relativo al gruppo corrispondente
 
     Gruppo:
       type: object
@@ -234,22 +515,22 @@ components:
         id:
           type: integer
           format: int32
-          readOnly: true
         nome:
-          $ref: '#/components/schemas/Dipartimento'
+          type: string
+          example: "Dipartimento di ingegneria"
         Descrizione:
           type: string
           description: Questa è la descrizione generica di un dipartimento
+
     Evento:
       type: object
       properties:
         id:
           type: integer
           format: int32
-          readOnly: true
-        nomeCorso:
+        nomeEvento:
           type: string
-          example: "Sviluppo Web Avanzato"
+          example: "Corso di SWA"
         nomeResposabile:
           type: string
           example: "Professore X"
@@ -259,8 +540,91 @@ components:
         emailResponsabile:
           type: string
           example: "responsabileEvento@gmail.com"
-        tipologia:
-          $ref: '#/components/schemas/Tipologia'
+        dataEvento:
+          type: string
+          format: date
+          example: "2023-09-25"
+        idAula:
+          type: integer
+          format: int32
+          description: Questo è l'id relativo all'aula in cui si svolge l'evento
+        startTime:
+          type: string
+          format: dateTime
+          description: Orario d'inizio evento
+        endTime:
+          type: string
+          format: dateTime
+          description: Orario di fine evento
+
+    Attrezzature:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id relativo all'aula
+        numeroTavoli:
+          type: integer
+          format: int32
+        numeroSedie:
+          type: integer
+          format: int32
+        numeroLavagne:
+          type: integer
+          format: int32
+
+    Boss:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+          example: "NomeAdmin1"
+        Password:
+          type: string
+          format: password
+          example: "PasswordAdmin1"
+
+    AulaBase:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nomeAula:
+          type: string
+          example: "C 1.10"
+        idGruppo:
+          type: integer
+          format: int32
+
+    EventoIcalendar:
+      type: object
+      properties:
+        nomeEvento:
+          type: string
+          example: 'Evento 1'
+        dataEvento:
+          type: string
+          format: date
+          example: '2023-07-25'
+        startTime:
+          type: string
+          format: dateTime
+          example: '08:00'
+        endTime:
+          type: string
+          format: dateTime
+          example: "16:00"
+    AulaCsv:
+      type: object
+      properties:
+        stringaCsv:
+          type: string
+          example: '1,Aula 1,Building A,First Floor,responsabile1@example.com,4,1'
 
 
 
@@ -278,62 +642,9 @@ components:
 
 
 
-    Luogo:
-      type: string
-      enum:
-        - COPPITO
-        - ROIO
-        - L'AQUILA
 
-    Edificio:
-      type: string
-      enum:
-        - BLOCCO 0
-        - BLOCCO 1
-        - BLOCCO 2
-        - BLOCCO 3
-        - BIBLIOTECA
-        - BLOCCO 11
-    Piano:
-      type: string
-      enum:
-        - PIANO TERRA
-        - PRIMO PIANO
-        - SECONDO PIANO
-        - TERZO PIANO
-        - QUARTO PIANO
 
-    ListaAttrezzature:
-      type: string
-      enum:
-        - PROIETTORE
-        - SCHERMO MOTORIZZATO
-        - SCHERMO MANUALE
-        - IMPIANTO AUDIO
-        - PC FISSO
-        - MICROFONO A FILO
-        - MICROFONO
-        - LAVAGNA LUMINOSA
-        - WI-FI
-    Dipartimento:
-      type: string
-      enum:
-        - INGEGNERIA
-        - SCIENZE UMANE
-        - MATEMATICA
-        - FISICA
-        - PSICOLOGIA
-        - INFORMATICA
-        - SCIENZE MOTORIE
-    Tipologia:
-      type: string
-      enum:
-        - LEZIONE
-        - ESAME
-        - SEMINARIO
-        - PARZIALE
-        - RIUNIONE
-        - LAUREA
+
 
 
 

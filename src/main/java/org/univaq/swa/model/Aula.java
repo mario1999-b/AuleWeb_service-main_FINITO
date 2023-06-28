@@ -1,5 +1,7 @@
 package org.univaq.swa.model;
 
+import org.apache.commons.csv.CSVFormat;
+
 public class Aula {
     private int id;
     private String nome;
@@ -90,6 +92,8 @@ public class Aula {
                 "," + emailResponsabile +
                 "," + idGruppo +
                 "," + idAttrezzature +
-                         ";" + "\n";
+                ","
+                ;
     }
+
 }
